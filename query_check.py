@@ -33,10 +33,14 @@ def magentaback(s):
     """Magenta background"""
     return Back.MAGENTA + s + Back.RESET
 #======================================================================================================
+#You can either give the text file input here 
 input_filename = input("Input text filename : ")
 filename = input_filename+'.txt'
 with open(filename, 'r') as data:
   tr = data.read()
+tr = tr.replace('\n','')
+#or you can also provide the text directly by copy pasting here
+tr = """<ENTER THE PARAGRAPH HERE>"""
 print("\n")
 print("Loading model...")
 # tensroflow hub module for Universal sentence Encoder
@@ -47,23 +51,10 @@ module_url = "https://tfhub.dev/google/universal-sentence-encoder-large/3"
 embed = hub.Module(module_url)
 
 
-query1 = "Tata Group Mediprime mediclaim policy tata group axis bank account verification department Medical Health Policy "
-query2 = "insured Person suffers an Illness or Accident during the Policy period that requires Insured Person’s Hospitalization as an inpatient,"
-query3 = "Day Care Procedure hospital beds Day Care procedures are surgeries or procedures which are undertaken by insured person as an inpatient for less than 24 hours in a hospital."
-query4 = "Critical Illness Cover Cancer heart attack kidney failure bone marrow transplantation paralysis stroke"
-# query5 = "Pre post hospitalization benefit includes medical Expenses incurred within 30 days immediately before the Insured Person was hospitalized  60 days immediately"
+query1 = "<ENTER YOUR SENTENCE HERE>"
 
 
-# keyword1 = "Tata Group Mediprime mediclaim policy"
-# keyword2 = "In-patient treatment"
-# keyword3 = "Pre post hospitalization"
-# keyword4 = "Day Care Procedure"
-# keyword5 = "Critical Illness Cover"
-
-
-tr = tr.replace('\n','')
-
-
+#paragraph is reuired to split into multiple sentences on the basis of puntuations.
 def splitParagraphIntoSentences(paragraph):
     ''' break a paragraph into sentences
         and return a list '''
@@ -194,45 +185,8 @@ print("Query: ", end='')
 print(greentext(query1))
 print(semantic_search(query1, data_processed, BASE_VECTORS))
 print("\n")
-print("Query: ", end='')
-print(greentext(query2))
-print(semantic_search(query2, data_processed, BASE_VECTORS))
-print("\n")
-print("Query: ", end='')
-print(greentext(query3))
-print(semantic_search(query3, data_processed, BASE_VECTORS))
-print("\n")
-print("Query: ", end='')
-print(greentext(query4))
-print(semantic_search(query4, data_processed, BASE_VECTORS))
-print("\n")
-# print("\n")
-# print("Query: ", end='')
-# print(greentext(query5))
-# print(semantic_search(query5, data_processed, BASE_VECTORS))
+
 end = time.time()
 print("Time taken : ",end='')
 print(round(end-start,3))
-
-
-# print("\n")
-# print("Keyword: ", end='')
-# print(greentext(keyword1))
-# print(semantic_search(keyword1, data_processed, BASE_VECTORS))
-# print("\n")
-# print("Keyword: ", end='')
-# print(greentext(keyword2))
-# print(semantic_search(keyword2, data_processed, BASE_VECTORS))
-# print("\n")
-# print("Keyword: ", end='')
-# print(greentext(keyword3))
-# print(semantic_search(keyword3, data_processed, BASE_VECTORS))
-# print("\n")
-# print("Keyword: ", end='')
-# print(greentext(keyword4))
-# print(semantic_search(keyword4, data_processed, BASE_VECTORS))
-# print("\n")
-# print("Keyword: ", end='')
-# print(greentext(keyword5))
-# print(semantic_search(keyword5, data_processed, BASE_VECTORS))
 
